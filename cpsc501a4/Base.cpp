@@ -28,3 +28,29 @@ void baseConvolution(float x[], int N, float h[], int M, float y[], int P) {
 		}
 	}
 }
+
+// Scale the File, code from lectures/tutorials
+void scaleWave(float signal[], int samples)
+{
+	printf("Scaling\n");
+	float min = 0, max = 0;
+	int i = 0;
+
+	for(i = 0; i < samples; i++){
+		if(signal[i] > max){
+			max = signal[i];
+		}
+		if(signal[i] < min){
+			min = signal[i];
+		}
+	}
+
+	min *= -1;
+	if(min > max){
+		max = min;
+	}
+
+	for(i = 0; i < samples; i++){
+		signal[i] = signal[i] / max;
+	}
+}

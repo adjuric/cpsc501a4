@@ -75,6 +75,47 @@ float* readFile(char *fileName, float *signal, int *Thesize)
 	return signal;
 }
 
+// Code Derived from Tutorial Example
+void writeFile(char *fileName, int numSamples, float *signal)
+{
+	//Open Stream and Set Parameters
+	ofstream outFile( fileName, ios::out | ios::binary);
+
+	printf("Writing: %s\n", fileName);
+	int chunkSize = channelNum * numSamples * (bPS / 8);
+	// Get Riff header and set the variables
+	chunkID = "RIFF";
+	outFile.write( chunkID, 4);
+	outFile.write( (char*) &chunkSize, 4);
+	// Get wave header and set the variables
+	formatArr = "WAVE";
+	outFile.write( formatArr, 4);
+	outFile.write( SC1ID, 4);
+	SC1Size = 16;
+	outFile.write( (char*) &SC1Size, 4);
+	outFile.write( (char*) &aFormat, 2);
+	outFile.write( (char*) &channelNum, 2);
+	outFile.write( (char*) &SRate, 4);
+	outFile.write( (char*) &BRate, 4);
+	outFile.write( (char*) &BAlign, 2);
+	outFile.write( (char*) &bPS, 2);
+
+	// Sub Chunk ID2
+	outFile.write( SC2ID, 4);
+
+	wavSize = numSamples * 2;
+	outFile.write( (char*)&wavSize, 4);
+
+	// Set Wave Data, Then Scale back up
+	int16_t val;
+	for(int i = 0; i < numSamples; i++){
+		val = (int16_t)(signal[i] * (32767));
+		outFile.write((char*)&val, 2);
+	}
+	
+	outFile.close();
+}
+
 // Code from Lecture
 void baseConvolution(float x[], int N, float h[], int M, float y[], int P) {
 	int n, m;

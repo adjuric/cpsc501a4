@@ -13,6 +13,43 @@
 
 using namespace std;
 
+int size, SC1Size, chunkSize, SRate, BRate, wavSize;
+char *chunkID, *formatArr, *SC1ID, *SC2ID;
+int16_t aFormat, channelNum, BAlign, bPS;
+short* wavData;
+
+void base(char *inputFile,char *IRfile, char *outputfile)
+{
+	printf("Base\n");
+
+	char *DSound = inputFile;
+	char *IResponse = IRfile;
+	char *convolution = outputfile;
+	int IRSize;
+
+	// Data from Dry Clip and IR Clip
+	float* inputFileSignal = readFile(DSound, inputFileSignal, &size);
+	float* IRFileSignal = readFile(IResponse, IRFileSignal, &size);
+	DSize = size;
+	IRSize = size;
+	int outSize = DSize + IRSize - 1;
+
+	// Array for Output
+	float *outputFileSignal = new float[outSize];
+
+	// Convolution method from Class
+	baseConvolution(inputFileSignal, DSize, IRFileSignal, IRSize, outputFileSignal, outSize);
+
+	// Scaling the wave back
+	scaleWave(outputFileSignal, outSize);
+
+	// Output the Wave File
+	writeFile(convolution, outSize, outputFileSignal);
+
+	printf("Output: %s\n", convolution);
+
+}
+
 float* readFile(char *fileName, float *signal, int *Thesize)
 {
 	ifstream inputFile( fileName, ios::in | ios::binary);

@@ -91,8 +91,6 @@ void abased(char *inputFile, char *IRfile, char *outputfile){
 	writeFile(convolution, outputFileSignal, outputFileSignal);
 }
 
-
-
 // Created with the class material
 void fft(float data[], int nn, int isign){
 	 unsigned long n, mmax, m, j, istep, i;
@@ -117,7 +115,6 @@ void fft(float data[], int nn, int isign){
 	    	}
 	    	j += m;
 	    }
-
 	    mmax = 2;
 	    while (n > mmax)
 	    {

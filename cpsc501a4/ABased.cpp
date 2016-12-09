@@ -125,10 +125,8 @@ void fft(float data[], int nn, int isign){
 	    	wpi = sin(theta);
 	    	wr = 1.0;
 	    	wi = 0.0;
-	    	for (m = 1; m < mmax; m += 2)
-	    	{
-	    		for (i = m; i <= n; i += istep)
-	    		{
+	    	for (m = 1; m < mmax; m += 2){
+	    		for (i = m; i <= n; i += istep){
 	    			j = i + mmax;
 	    			tempr = wr * data[j] - wi * data[j+1];
 	    			tempi = wr * data[j+1] + wi * data[j];

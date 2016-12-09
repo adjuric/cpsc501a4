@@ -62,8 +62,6 @@ void abased(char *inputFile, char *IRfile, char *outputfile){
 	    ir[k] = IRFileSignal[i];
 	    ir[k + 1] = 0;
 	}
-	
-	
 	i = k;
 	memset(ir + k, 0, (2*totalsize) -1);
 	memset(complex, 0, (2*totalsize));
@@ -141,6 +139,7 @@ void fft(float data[], int nn, int isign){
 	    	mmax = istep;
 	    }
 }
+
 
 void solve(float wavInput[], float irInput[], float result[], int size){
 	int i  = 0;

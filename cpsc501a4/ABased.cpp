@@ -139,8 +139,6 @@ void fft(float data[], int nn, int isign){
 	    	mmax = istep;
 	    }
 }
-
-
 void solve(float wavInput[], float irInput[], float result[], int size){
 	int i  = 0;
 	for(i = 0; i < size; i++){

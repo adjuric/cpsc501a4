@@ -43,7 +43,6 @@ void abased(char *inputFile, char *IRfile, char *outputfile){
 		totalsize <<= someNum;
 		someNum++;
 	}
-
 	// Creating the Padding for the Dry File
 	float *complex = new float [2*totalsize];
 	float *input = new float[2*totalsize];
@@ -63,6 +62,8 @@ void abased(char *inputFile, char *IRfile, char *outputfile){
 	    ir[k] = IRFileSignal[i];
 	    ir[k + 1] = 0;
 	}
+	
+	
 	i = k;
 	memset(ir + k, 0, (2*totalsize) -1);
 	memset(complex, 0, (2*totalsize));

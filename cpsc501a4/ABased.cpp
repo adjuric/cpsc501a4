@@ -11,7 +11,13 @@
 #include <math.h>
 #include <time.h>
 
+int fsize;
+clock_t t1, t2;
+#define PI	3.141592653589793
+#define TWO_PI	(2.0 * PI)
+#define SWAP(a,b)	tempr=(a);(a)=(b);(b)=tempr
 
+// Created with the class material
 void fft(float data[], int nn, int isign){
 	 unsigned long n, mmax, m, j, istep, i;
 	    float wtemp, wr, wpr, wpi, wi, theta;
@@ -63,4 +69,12 @@ void fft(float data[], int nn, int isign){
 	    	}
 	    	mmax = istep;
 	    }
+}
+
+void solve(float wavInput[], float irInput[], float result[], int size){
+	int i  = 0;
+	for(i = 0; i < size; i++){
+		result[i * 2] = wavInput[i * 2] * irInput[i * 2] - wavInput[(i * 2)+1] * irInput[(i * 2)+1];
+		result[(i * 2) +1] = wavInput[(i * 2)+1] * irInput[i * 2] - wavInput[i * 2] * irInput[(i * 2)+1];
+	}
 }
